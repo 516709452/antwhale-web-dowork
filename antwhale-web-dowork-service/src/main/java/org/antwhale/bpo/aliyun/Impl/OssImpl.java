@@ -67,7 +67,7 @@ public class OssImpl implements OssBPO {
         String postSignature = ossClient.calculatePostSignature(postPolicy);
 
 
-        respMap.put("accessId", AliyunOssAccountEnum.getAccessKeyID.getValue());
+        respMap.put("accessid", AliyunOssAccountEnum.getAccessKeyID.getValue());
         respMap.put("policy", encodedPolicy);
         respMap.put("signature", postSignature);
         respMap.put("dir", dir);
