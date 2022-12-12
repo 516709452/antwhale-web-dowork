@@ -28,7 +28,7 @@ public class OssImpl implements OssBPO {
     @Override
     public Map<String, String> upLoadOssCourse(MultipartFile file) {
         // 设置上传到OSS文件的前缀，可置空此项。置空后，文件将上传至Bucket的根目录下。
-        String dir = format + "/";
+        String dir = "course/" + format + "/";
 
         return getRespMap(dir);
     }
@@ -36,17 +36,17 @@ public class OssImpl implements OssBPO {
     @Override
     public Map<String, String> upLoadOssUserAvatar(MultipartFile file) {
         // 设置上传到OSS文件的前缀，可置空此项。置空后，文件将上传至Bucket的根目录下。
-        String dir = format + "/";
+        String dir = "avatar/" + format + "/";
 
         return getRespMap(dir);
     }
 
     /**
-    *@author 何欢
-    *@Date 10:09 2022/12/11
-    *@Description 访问阿里云Oss获取签名
-    **/
-    private Map<String,String> getRespMap(String dir){
+     * @author 何欢
+     * @Date 10:09 2022/12/11
+     * @Description 访问阿里云Oss获取签名
+     **/
+    private Map<String, String> getRespMap(String dir) {
         OSS ossClient = AliyunOSSUtils.getOssClient();
         Map<String, String> respMap = new LinkedHashMap<>();
         long expireTime = 30;
