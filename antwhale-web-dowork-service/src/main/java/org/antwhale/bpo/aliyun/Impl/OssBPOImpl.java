@@ -8,7 +8,7 @@ import org.antwhale.bpo.aliyun.OssBPO;
 import org.antwhale.code.AliyunOssAccountEnum;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import utils.AliyunOSSUtils;
+import utils.AliyunUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @Description:
  */
 @Service
-public class OssImpl implements OssBPO {
+public class OssBPOImpl implements OssBPO {
     String format = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @Override
@@ -47,7 +47,7 @@ public class OssImpl implements OssBPO {
      * @Description 访问阿里云Oss获取签名
      **/
     private Map<String, String> getRespMap(String dir) {
-        OSS ossClient = AliyunOSSUtils.getOssClient();
+        OSS ossClient = AliyunUtils.getOssClient();
         Map<String, String> respMap = new LinkedHashMap<>();
         long expireTime = 30;
         long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
