@@ -1,16 +1,14 @@
 package org.antwhale.controller.aliyun;
 
+import com.aliyun.vod20170321.models.GetPlayInfoResponse;
 import com.aliyun.vod20170321.models.GetVideoListResponse;
 import com.aliyun.vod20170321.models.SearchMediaResponse;
 import com.antwhale.framework.code.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.antwhale.bpo.aliyun.VodBPO;
-import org.antwhale.dto.VodResultDTO;
+import org.antwhale.dto.vod.VodAliyunAddressParamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -31,9 +29,9 @@ public class VodController {
      * @Date 16:35 2022/12/17
      * @Description 查询阿里云视频请求
      **/
-    @PostMapping("/queryVodAliyun")
-    public ResultVo queryVodAliyun() throws Exception {
-        SearchMediaResponse searchMediaResponse = vodBPO.queryVodAliyun();
+    @GetMapping("/queryVodAliyun")
+    public ResultVo queryVodAliyun(@RequestParam("videoSourceId") String videoSourceId) throws Exception {
+        SearchMediaResponse searchMediaResponse = vodBPO.queryVodAliyun(videoSourceId);
         return ResultVo.ok(searchMediaResponse);
     }
 
@@ -45,6 +43,17 @@ public class VodController {
     @PostMapping("/queryVodAliyunOriginal")
     public ResultVo queryVodAliyunOriginal(@RequestBody Map<String,Object> paramMap) throws Exception {
         GetVideoListResponse getVideoListResponse = vodBPO.queryVodAliyunOriginal(paramMap);
+        return ResultVo.ok(getVideoListResponse);
+    }
+
+    /**
+    *@author 何欢
+    *@Date 17:05 2022/12/20
+    *@Description 得到阿里云播放地址
+    **/
+    @PostMapping("/queryVodAliyunAddress")
+    public ResultVo queryVodAliyunAddress(@RequestBody VodAliyunAddressParamDTO vodAliyunAddressParamDTO) throws Exception {
+        GetPlayInfoResponse getVideoListResponse = vodBPO.queryVodAliyunAddress(vodAliyunAddressParamDTO);
         return ResultVo.ok(getVideoListResponse);
     }
 }
