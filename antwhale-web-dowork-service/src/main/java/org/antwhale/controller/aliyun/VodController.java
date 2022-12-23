@@ -2,11 +2,13 @@ package org.antwhale.controller.aliyun;
 
 import com.aliyun.vod20170321.models.GetPlayInfoResponse;
 import com.aliyun.vod20170321.models.GetVideoListResponse;
+import com.aliyun.vod20170321.models.GetVideoPlayAuthResponse;
 import com.aliyun.vod20170321.models.SearchMediaResponse;
 import com.antwhale.framework.code.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.antwhale.bpo.aliyun.VodBPO;
 import org.antwhale.dto.vod.VodAliyunAddressParamDTO;
+import org.antwhale.dto.vod.VodAliyunPalyAuthParamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +57,16 @@ public class VodController {
     public ResultVo queryVodAliyunAddress(@RequestBody VodAliyunAddressParamDTO vodAliyunAddressParamDTO) throws Exception {
         GetPlayInfoResponse getVideoListResponse = vodBPO.queryVodAliyunAddress(vodAliyunAddressParamDTO);
         return ResultVo.ok(getVideoListResponse);
+    }
+
+    /**
+    *@author 何欢
+    *@Date 19:09 2022/12/23
+    *@Description 得到阿里云视频播放凭证
+    **/
+    @PostMapping("/queryVodAliyunPalyAuth")
+    public ResultVo queryVodAliyunPalyAuth(@RequestBody VodAliyunPalyAuthParamDTO vodAliyunAddressParamDTO) throws Exception {
+        GetVideoPlayAuthResponse getVideoPlayAuthResponse = vodBPO.queryVodAliyunPalyAuth(vodAliyunAddressParamDTO);
+        return ResultVo.ok(getVideoPlayAuthResponse);
     }
 }

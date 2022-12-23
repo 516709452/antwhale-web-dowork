@@ -2,8 +2,10 @@ package org.antwhale.bpo.aliyun;
 
 import com.aliyun.vod20170321.models.GetPlayInfoResponse;
 import com.aliyun.vod20170321.models.GetVideoListResponse;
+import com.aliyun.vod20170321.models.GetVideoPlayAuthResponse;
 import com.aliyun.vod20170321.models.SearchMediaResponse;
 import org.antwhale.dto.vod.VodAliyunAddressParamDTO;
+import org.antwhale.dto.vod.VodAliyunPalyAuthParamDTO;
 
 import java.util.Map;
 
@@ -33,4 +35,11 @@ public interface VodBPO {
     *@Description 得到阿里云播放地址
     **/
     GetPlayInfoResponse queryVodAliyunAddress(VodAliyunAddressParamDTO vodAliyunAddressParamDTO) throws Exception;
+
+    /**
+     *@author 何欢
+     *@Date 19:09 2022/12/23
+     *@Description 得到阿里云视频播放凭证
+     **/
+    GetVideoPlayAuthResponse queryVodAliyunPalyAuth(VodAliyunPalyAuthParamDTO vodAliyunAddressParamDTO) throws Exception;
 }

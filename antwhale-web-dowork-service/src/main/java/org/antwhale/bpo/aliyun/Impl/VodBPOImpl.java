@@ -6,6 +6,7 @@ import com.aliyun.vod20170321.models.*;
 import com.antwhale.framework.utils.CommonUtils;
 import org.antwhale.bpo.aliyun.VodBPO;
 import org.antwhale.dto.vod.VodAliyunAddressParamDTO;
+import org.antwhale.dto.vod.VodAliyunPalyAuthParamDTO;
 import org.springframework.stereotype.Service;
 import utils.AliyunUtils;
 
@@ -51,9 +52,9 @@ public class VodBPOImpl implements VodBPO {
     }
 
     /**
-     *@author 何欢
-     *@Date 17:05 2022/12/20
-     *@Description 得到阿里云播放地址
+     * @author 何欢
+     * @Date 17:05 2022/12/20
+     * @Description 得到阿里云播放地址
      **/
     @Override
     public GetPlayInfoResponse queryVodAliyunAddress(VodAliyunAddressParamDTO vodAliyunAddressParamDTO) throws Exception {
@@ -61,9 +62,25 @@ public class VodBPOImpl implements VodBPO {
         GetPlayInfoRequest getPlayInfoRequest = new GetPlayInfoRequest();
         getPlayInfoRequest.videoId = vodAliyunAddressParamDTO.getVideoId();
         RuntimeOptions runtime = new RuntimeOptions();
-            // 复制代码运行请自行打印 API 的返回值
+        // 复制代码运行请自行打印 API 的返回值
         GetPlayInfoResponse playInfoWithOptions = client.getPlayInfoWithOptions(getPlayInfoRequest, runtime);
         return playInfoWithOptions;
+    }
+
+    /**
+     * @author 何欢
+     * @Date 19:09 2022/12/23
+     * @Description 得到阿里云视频播放凭证
+     **/
+    @Override
+    public GetVideoPlayAuthResponse queryVodAliyunPalyAuth(VodAliyunPalyAuthParamDTO vodAliyunAddressParamDTO) throws Exception {
+        Client client = AliyunUtils.getAcsClient();
+        GetVideoPlayAuthRequest getVideoPlayAuthRequest = new GetVideoPlayAuthRequest();
+        getVideoPlayAuthRequest.setVideoId(vodAliyunAddressParamDTO.getVodId());
+        RuntimeOptions runtime = new RuntimeOptions();
+        // 复制代码运行请自行打印 API 的返回值
+        GetVideoPlayAuthResponse videoPlayAuthResponse = client.getVideoPlayAuthWithOptions(getVideoPlayAuthRequest, runtime);
+        return videoPlayAuthResponse;
     }
 
     /**
@@ -76,8 +93,8 @@ public class VodBPOImpl implements VodBPO {
         SearchMediaRequest searchMediaRequest = new SearchMediaRequest();
         searchMediaRequest.setSearchType("video");
         searchMediaRequest.setFields(Fileds);
-        if(CommonUtils.IsNotNull(videoSourceId)){
-            String videoId ="VideoId='"+videoSourceId+"'";
+        if (CommonUtils.IsNotNull(videoSourceId)) {
+            String videoId = "VideoId='" + videoSourceId + "'";
             searchMediaRequest.setMatch(videoId);
         }
         return searchMediaRequest;
