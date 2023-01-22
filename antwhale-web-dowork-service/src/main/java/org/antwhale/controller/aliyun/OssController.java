@@ -4,7 +4,9 @@ import com.antwhale.framework.code.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.antwhale.bpo.aliyun.OssBPO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -22,9 +24,9 @@ public class OssController {
     private OssBPO ossBPO;
 
     /**
-     *@author 何欢
-     *@Date 5:01 2022/12/11
-     *@Description 视频课程图片上传
+     * @author 何欢
+     * @Date 5:01 2022/12/11
+     * @Description 视频课程图片上传
      **/
     @PostMapping("/upLoadOssCourse")
     public ResultVo upLoadOssCourse(MultipartFile file) {
@@ -33,13 +35,24 @@ public class OssController {
     }
 
     /**
-    *@author 何欢
-    *@Date 10:07 2022/12/11
-    *@Description 用户头像上传
-    **/
+     * @author 何欢
+     * @Date 10:07 2022/12/11
+     * @Description 用户头像上传
+     **/
     @PostMapping("/upLoadOssUserAvatar")
     public ResultVo upLoadOssUserAvatar(MultipartFile file) {
         Map<String, String> resultMap = ossBPO.upLoadOssUserAvatar(file);
+        return ResultVo.ok(resultMap);
+    }
+
+    /**
+     * @author 何欢
+     * @Date 10:07 2022/12/11
+     * @Description 讲师头像上传
+     **/
+    @PostMapping("/upLoadOssTeacherAvatar")
+    public ResultVo upLoadOssTeacherAvatar(MultipartFile file) {
+        Map<String, String> resultMap = ossBPO.upLoadOssTeacherAvatar(file);
         return ResultVo.ok(resultMap);
     }
 }

@@ -36,7 +36,15 @@ public class OssBPOImpl implements OssBPO {
     @Override
     public Map<String, String> upLoadOssUserAvatar(MultipartFile file) {
         // 设置上传到OSS文件的前缀，可置空此项。置空后，文件将上传至Bucket的根目录下。
-        String dir = "avatar/" + format + "/";
+        String dir = "avatar/user/" + format + "/";
+
+        return getRespMap(dir);
+    }
+
+    @Override
+    public Map<String, String> upLoadOssTeacherAvatar(MultipartFile file) {
+        // 设置上传到OSS文件的前缀，可置空此项。置空后，文件将上传至Bucket的根目录下。
+        String dir = "avatar/teacher/" + format + "/";
 
         return getRespMap(dir);
     }
